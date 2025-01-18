@@ -1,0 +1,5 @@
+ma1_joystick_interface_node:
+  ros__parameters:
+    surge_gain: 1000.0
+    sway_gain: 1000.0
+    yaw_gain: 1000.0
