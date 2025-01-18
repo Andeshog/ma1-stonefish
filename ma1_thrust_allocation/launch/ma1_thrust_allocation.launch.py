@@ -9,14 +9,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    joy_node = Node(
-        package='joy',
-        executable='joy_node',
-        name='joy_node',
-        output='screen'
-    )
-
     return LaunchDescription([
-        ma1_thrust_allocation_node,
-        joy_node
+        ma1_thrust_allocation_node
     ])
