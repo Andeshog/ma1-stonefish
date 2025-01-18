@@ -32,5 +32,6 @@
   <include file="$(find ma1_sim)/metadata/looks.scn"/>
 
   <include file="$(find ma1_sim)/scenarios/ma1.scn"/>
+  <include file="$(find ma1_sim)/scenarios/river.scn"/>
 
 </scenario>

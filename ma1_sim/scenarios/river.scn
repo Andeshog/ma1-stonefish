@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<scenario>
+    <static name="River side north" type="model">
+        <physical>
+            <mesh filename="long_wall.obj" scale="1.0"/>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        </physical>
+        <material name="Neutral"/>
+        <look name="Green"/>
+        <world_transform xyz="30.0 0.0 8.5" rpy="0.0 0.0 0.0"/>
+    </static>
+
+    <static name="River side south" type="model">
+        <physical>
+            <mesh filename="long_wall.obj" scale="1.0"/>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        </physical>
+        <material name="Neutral"/>
+        <look name="Green"/>
+        <world_transform xyz="-30.0 0.0 8.5" rpy="0.0 0.0 3.14"/>
+    </static>
+
+    <static name="dock" type="model">
+        <physical>
+            <mesh filename="dock.obj" scale="1.0"/>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        </physical>
+        <material name="Neutral"/>
+        <look name="BeigeWood"/>
+        <world_transform xyz="-29.5.0 0.8 0.0" rpy="0.0 0.0 0.0"/>
+    </static>
+
+</scenario>
