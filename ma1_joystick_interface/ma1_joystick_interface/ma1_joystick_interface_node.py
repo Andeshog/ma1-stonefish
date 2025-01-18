@@ -30,8 +30,8 @@ class JoystickInterface(Node):
         
     def joy_callback(self, msg: Joy):
         left_vertical = msg.axes[1]
-        left_horizontal = msg.axes[0]
-        right_horizontal = msg.axes[3]
+        left_horizontal = -msg.axes[0]
+        right_horizontal = -msg.axes[3]
 
         tau = Wrench()
         tau.force.x = self.surge_gain_ * left_vertical
