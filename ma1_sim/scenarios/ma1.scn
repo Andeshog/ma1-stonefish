@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<scenario>
+    <robot name="mA1" fixed="false" self_collisions="false">
+        <base_link name="Base" type="model" physics="floating">
+            <physical>
+                <mesh filename="ma1_mesh.obj" scale="1.0"/>
+                <origin rpy="-1.57 0.0 0.0" xyz="0.0 0.0 0.0"/>
+            </physical>
+            <visual>
+                <mesh filename="ma1.obj" scale="1.0"/>
+                <origin rpy="-1.57 0.0 0.0" xyz="0.0 0.0 0.0"/>
+            </visual>
+            <material name="Neutral"/>
+            <look name="Gray"/>
+            <mass value="3900.0"/>
+            <!-- <cg xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <hydrodynamics viscous_drag="0.1 0.1 1.9" quadratic_drag="0.1 0.1 1.9"/> -->
+        </base_link>
+        
+
+        <link name="azimuth_1" type="cylinder">
+            <dimensions radius="0.03" height="0.3"/>
+            <material name="Neutral"/>
+            <look name="Black"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </link>
+
+        <joint name="azimuth_1_joint" type="revolute">
+            <parent name="Base"/>
+            <child name="azimuth_1"/>
+            <axis xyz="0.0 0.0 1.0"/>
+            <limits min="-3.14159265359" max="3.14159265359"/>
+            <origin xyz="1.8 -0.8 0.0" rpy="0.0 0.0 3.14"/>
+        </joint>
+
+        <link name="azimuth_2" type="cylinder">
+            <dimensions radius="0.03" height="0.3"/>
+            <material name="Neutral"/>
+            <look name="Black"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </link>
+
+        <joint name="azimuth_2_joint" type="revolute">
+            <parent name="Base"/>
+            <child name="azimuth_2"/>
+            <axis xyz="0.0 0.0 1.0"/>
+            <limits min="-3.14159265359" max="3.14159265359"/>
+            <origin xyz="1.8 0.8 0.0" rpy="0.0 0.0 3.14"/>
+        </joint>
+
+        <link name="azimuth_3" type="cylinder">
+            <dimensions radius="0.03" height="0.3"/>
+            <material name="Neutral"/>
+            <look name="Black"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </link>
+
+        <joint name="azimuth_3_joint" type="revolute">
+            <parent name="Base"/>
+            <child name="azimuth_3"/>
+            <axis xyz="0.0 0.0 1.0"/>
+            <limits min="-3.14159265359" max="3.14159265359"/>
+            <origin xyz="-1.8 0.8 0.0" rpy="0.0 0.0 1.57"/>
+        </joint>
+
+        <link name="azimuth_4" type="cylinder">
+            <dimensions radius="0.03" height="0.3"/>
+            <material name="Neutral"/>
+            <look name="Black"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </link>
+
+        <joint name="azimuth_4_joint" type="revolute">
+            <parent name="Base"/>
+            <child name="azimuth_4"/>
+            <axis xyz="0.0 0.0 1.0"/>
+            <limits min="-3.14159265359" max="3.14159265359"/>
+            <origin xyz="-1.8 -0.8 0.0" rpy="0.0 0.0 -1.57"/>
+        </joint>
+
+        <actuator name="Servo1" type="servo">
+            <joint name="azimuth_1_joint"/>
+            <controller position_gain="1.0" velocity_gain="1.0" max_torque="10.0"/>
+            <initial position="-0.78"/>
+        </actuator>
+
+        <actuator name="Servo2" type="servo">
+            <joint name="azimuth_2_joint"/>
+            <controller position_gain="1.0" velocity_gain="1.0" max_torque="10.0"/>
+            <initial position="0.78"/>
+        </actuator>
+
+        <actuator name="Servo3" type="servo">
+            <joint name="azimuth_3_joint"/>
+            <controller position_gain="1.0" velocity_gain="1.0" max_torque="10.0"/>
+            <initial position="0.78"/>
+        </actuator>
+
+        <actuator name="Servo4" type="servo">
+            <joint name="azimuth_4_joint"/>
+            <controller position_gain="1.0" velocity_gain="1.0" max_torque="10.0"/>
+            <initial position="-0.78"/>
+        </actuator>
+
+        <actuator name="Thruster1" type="thruster">
+            <link name="azimuth_1"/>
+            <origin xyz="-0.1 0.0 0.1" rpy="0 0 0"/>
+            <specs max_setpoint="850.0" inverted_setpoint="false" normalized_setpoint="false"/>
+            <propeller diameter="0.3" right="true">
+                <mesh filename="bluerov2_propccw.obj" scale="3.0"/>
+                <material name="robot_material"/>
+                <look name="Gray"/>
+            </propeller>
+            <rotor_dynamics type="zero_order"/>
+            <thrust_model type="linear_interpolation">
+                <input value="-330.0 -130.0 0.0 135.0 425.0"/>
+                <output value="-330.0 -130.0 0.0 135.0 425.0"/>
+            </thrust_model>
+        </actuator> 
+
+        <actuator name="Thruster2" type="thruster">
+            <link name="azimuth_2"/>
+            <origin xyz="-0.1 0.0 0.1" rpy="0 0 0"/>
+            <specs max_setpoint="850.0" inverted_setpoint="false" normalized_setpoint="false"/>
+            <propeller diameter="0.3" right="true">
+                <mesh filename="bluerov2_propccw.obj" scale="3.0"/>
+                <material name="robot_material"/>
+                <look name="Gray"/>
+            </propeller>
+            <rotor_dynamics type="zero_order"/>
+            <thrust_model type="linear_interpolation">
+                <input value="-330.0 -130.0 0.0 135.0 425.0"/>
+                <output value="-330.0 -130.0 0.0 135.0 425.0"/>
+            </thrust_model>
+        </actuator> 
+
+        <actuator name="Thruster3" type="thruster">
+            <link name="azimuth_3"/>
+            <origin xyz="0.1 0.0 0.1" rpy="0 0 0"/>
+            <specs max_setpoint="850.0" inverted_setpoint="false" normalized_setpoint="false"/>
+            <propeller diameter="0.3" right="true">
+                <mesh filename="bluerov2_propccw.obj" scale="3.0"/>
+                <material name="robot_material"/>
+                <look name="Gray"/>
+            </propeller>
+            <rotor_dynamics type="zero_order"/>
+            <thrust_model type="linear_interpolation">
+                <input value="-330.0 -130.0 0.0 135.0 425.0"/>
+                <output value="-330.0 -130.0 0.0 135.0 425.0"/>
+            </thrust_model>
+        </actuator> 
+
+        <actuator name="Thruster4" type="thruster">
+            <link name="azimuth_4"/>
+            <origin xyz="0.1 0.0 0.1" rpy="0 0 0"/>
+            <specs max_setpoint="850.0" inverted_setpoint="false" normalized_setpoint="false"/>
+            <propeller diameter="0.3" right="true">
+                <mesh filename="bluerov2_propccw.obj" scale="3.0"/>
+                <material name="robot_material"/>
+                <look name="Gray"/>
+            </propeller>
+            <rotor_dynamics type="zero_order"/>
+            <thrust_model type="linear_interpolation">
+                <input value="-330.0 -130.0 0.0 135.0 425.0"/>
+                <output value="-330.0 -130.0 0.0 135.0 425.0"/>
+            </thrust_model>
+        </actuator>
+
+        <link name="Hatch1" type="model">
+            <physical>
+                <mesh filename="ma1_hatch.obj" scale="1.0"/>
+                <origin rpy="-1.57 0.0 0.0" xyz="0.0 0.0 0.0"/>
+            </physical>
+            <visual>
+                <mesh filename="ma1_hatch.obj" scale="1.0"/>
+                <origin rpy="-1.57 0.0 0.0" xyz="0.0 0.0 0.0"/>
+            </visual>
+            <material name="Neutral"/>
+            <look name="Gray"/>
+            <!-- <mass value="0.01"/> -->
+        </link>
+
+        <joint name="Hatch1_joint" type="revolute">
+            <parent name="Base"/>
+            <child name="Hatch1"/>
+            <axis xyz="0.0 1.0 0.0"/>
+            <origin rpy="0 0 0" xyz="2.5 0.0 -0.8"/>
+            <damping value="900.0"/>
+        </joint>
+
+        <link name="Hatch2" type="model">
+            <physical>
+                <mesh filename="ma1_hatch.obj" scale="1.0"/>
+                <origin rpy="-1.57 0.0 0.0" xyz="0.0 0.0 0.0"/>
+            </physical>
+            <visual>
+                <mesh filename="ma1_hatch.obj" scale="1.0"/>
+                <origin rpy="-1.57 0.0 0.0" xyz="0.0 0.0 0.0"/>
+            </visual>
+            <material name="Neutral"/>
+            <look name="Gray"/>
+            <!-- <mass value="0.01"/> -->
+        </link>
+
+        <joint name="Hatch2_joint" type="revolute">
+            <parent name="Base"/>
+            <child name="Hatch2"/>
+            <origin rpy="0 0 0" xyz="-2.5 0.0 -0.8"/>
+            <axis xyz="0.0 1.0 0.0"/>
+            <damping value="900.0"/>
+        </joint>
+
+        <actuator name="Hatch_servo_1" type="servo">
+            <joint name="Hatch1_joint"/>
+            <controller position_gain="5" velocity_gain="0.1" max_torque="500.0"/>
+            <initial position="0.0"/>
+            <limits min="-1.7" max="0.0"/>
+        </actuator>
+
+        <actuator name="Hatch_servo_2" type="servo">
+            <joint name="Hatch2_joint"/>
+            <controller position_gain="5.0" velocity_gain="0.1" max_torque="500.0"/>
+            <initial position="0.0"/>
+            <limits min="0.0" max="1.7"/>
+        </actuator>
+
+        <sensor name="odom" type="odometry" rate="10.0">
+            <link name="Base"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <ros_publisher topic="/ma1/odom"/>
+        </sensor>
+        
+        <world_transform xyz="0.0 0.0 0.0" rpy="-1.57 0.0 0.0"/>
+
+        <ros_subscriber thrusters="/ma1/thrusters" servos="/ma1/servos"/>
+        <ros_publisher thrusters="/ma1/thruster_state" servos="/ma1/servo_state"/>
+    </robot>
+</scenario>
