@@ -106,7 +106,7 @@
             <link name="azimuth_1"/>
             <origin xyz="-0.1 0.0 0.1" rpy="0 0 0"/>
             <specs max_setpoint="850.0" inverted_setpoint="false" normalized_setpoint="false"/>
-            <propeller diameter="0.3" right="true">
+            <propeller diameter="0.3" right="false">
                 <mesh filename="bluerov2_propccw.obj" scale="3.0"/>
                 <material name="robot_material"/>
                 <look name="Gray"/>
@@ -122,7 +122,7 @@
             <link name="azimuth_2"/>
             <origin xyz="-0.1 0.0 0.1" rpy="0 0 0"/>
             <specs max_setpoint="850.0" inverted_setpoint="false" normalized_setpoint="false"/>
-            <propeller diameter="0.3" right="true">
+            <propeller diameter="0.3" right="false">
                 <mesh filename="bluerov2_propccw.obj" scale="3.0"/>
                 <material name="robot_material"/>
                 <look name="Gray"/>
