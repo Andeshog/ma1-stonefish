@@ -2,10 +2,10 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    ma1_interface_node = Node(
-        package='ma1_sim',
-        executable='ma1_sim_interface',
-        name='ma1_sim_interface',
+    ma1_thrust_allocation_node = Node(
+        package='ma1_thrust_allocation',
+        executable='ma1_thrust_allocation_node.py',
+        name='ma1_thrust_allocation_node',
         output='screen'
     )
 
@@ -17,6 +17,6 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        ma1_interface_node,
+        ma1_thrust_allocation_node,
         joy_node
     ])

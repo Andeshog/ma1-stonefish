@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.8)
+project(ma1_thrust_allocation)
+
+find_package(ament_cmake_python REQUIRED)
+find_package(rclpy REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
+ament_python_install_package(${PROJECT_NAME})
+
+install(PROGRAMS
+  ${PROJECT_NAME}/ma1_thrust_allocation_node.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+ament_package()
