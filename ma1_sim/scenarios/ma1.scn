@@ -13,8 +13,8 @@
             <material name="Neutral"/>
             <look name="Gray"/>
             <mass value="3900.0"/>
-            <!-- <cg xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <hydrodynamics viscous_drag="0.1 0.1 1.9" quadratic_drag="0.1 0.1 1.9"/> -->
+            <!-- <cg xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/> -->
+            <hydrodynamics viscous_drag="0.1 0.1 0.2" quadratic_drag="0.1 0.1 0.9"/>
         </base_link>
         
 
@@ -230,7 +230,7 @@
             <ros_publisher topic="/ma1/odom"/>
         </sensor>
         
-        <world_transform xyz="0.0 0.0 0.0" rpy="-1.57 0.0 0.0"/>
+        <world_transform xyz="0.0 0.0 0.5" rpy="-1.57 0.0 0.0"/>
 
         <ros_subscriber thrusters="/ma1/thrusters" servos="/ma1/servos"/>
         <ros_publisher thrusters="/ma1/thruster_state" servos="/ma1/servo_state"/>
