@@ -31,6 +31,38 @@ class ThrustAllocationNode(Node):
 
         self.allocator_.compute_configuration_matrix()
 
+        self.allocator_bow = rf.MinimumMagnitudeAndAzimuth(
+            actuators=ma1_actuators.bow_actuators(),
+            force_torque_components=[
+                sk.allocator.ForceTorqueComponent.X,
+                sk.allocator.ForceTorqueComponent.Y,
+                sk.allocator.ForceTorqueComponent.N,
+            ],
+            gamma=0.2,
+            mu=10,
+            rho=0.1,
+            time_step=0.065, # Publish rate of joy
+            control_barrier_function=sk.safety.ControlBarrierFunctionType.ABSOLUTE
+        )
+
+        self.allocator_bow.compute_configuration_matrix()
+
+        self.allocator_stern = rf.MinimumMagnitudeAndAzimuth(
+            actuators=ma1_actuators.stern_actuators(),
+            force_torque_components=[
+                sk.allocator.ForceTorqueComponent.X,
+                sk.allocator.ForceTorqueComponent.Y,
+                sk.allocator.ForceTorqueComponent.N,
+            ],
+            gamma=0.2,
+            mu=10,
+            rho=0.1,
+            time_step=0.065, # Publish rate of joy
+            control_barrier_function=sk.safety.ControlBarrierFunctionType.ABSOLUTE
+        )
+
+        self.allocator_stern.compute_configuration_matrix()
+
         self.wrench_sub_ = self.create_subscription(
             Wrench, 'ma1/tau', self.wrench_callback, 10)
         
@@ -40,22 +72,45 @@ class ThrustAllocationNode(Node):
         self.azi_pub_ = self.create_publisher(
             JointState, '/ma1/servos', 10)
         
+        self.mode = self.declare_parameter('mode', '_').get_parameter_value().string_value
+
+        self.get_logger().info(f'Mode: {self.mode}')
+        
         self.get_logger().info('Thrust Allocation Node has been initialized')
 
     def wrench_callback(self, msg: Wrench):
-        tau_list = [msg.force.x, msg.force.y, 0, 0, 0, msg.torque.z]
-        tau = np.array([tau_list]).T
-        forces = self.allocator_.allocate(tau)[0].flatten()
+        if self.mode == 'normal':
+            tau_list = [msg.force.x, msg.force.y, 0, 0, 0, msg.torque.z]
+            tau = np.array([tau_list]).T
+            forces = self.allocator_.allocate(tau)[0].flatten()
 
-        thruster_1_thrust = np.linalg.norm(forces[0:2])
-        thruster_2_thrust = np.linalg.norm(forces[2:4])
-        thruster_3_thrust = np.linalg.norm(forces[4:6])
-        thruster_4_thrust = np.linalg.norm(forces[6:8])
+            thruster_1_thrust = np.linalg.norm(forces[0:2])
+            thruster_2_thrust = np.linalg.norm(forces[2:4])
+            thruster_3_thrust = np.linalg.norm(forces[4:6])
+            thruster_4_thrust = np.linalg.norm(forces[6:8])
 
-        angle_1 = np.arctan2(forces[1], forces[0])
-        angle_2 = np.arctan2(forces[3], forces[2])
-        angle_3 = np.arctan2(forces[5], forces[4])
-        angle_4 = np.arctan2(forces[7], forces[6])
+            angle_1 = np.arctan2(forces[1], forces[0])
+            angle_2 = np.arctan2(forces[3], forces[2])
+            angle_3 = np.arctan2(forces[5], forces[4])
+            angle_4 = np.arctan2(forces[7], forces[6])
+
+        elif self.mode == 'hybrid':
+
+            stern_tau = np.array([[msg.force.x, msg.force.y / 2, 0, 0, 0, 0]]).T
+            bow_tau = np.array([[0, msg.force.y / 2, 0, 0, 0, msg.torque.z]]).T
+
+            stern_forces = self.allocator_stern.allocate(stern_tau)[0].flatten()
+            bow_forces = self.allocator_bow.allocate(bow_tau)[0].flatten()
+
+            thruster_1_thrust = np.linalg.norm(bow_forces[0:2])
+            thruster_2_thrust = np.linalg.norm(bow_forces[2:4])
+            thruster_3_thrust = np.linalg.norm(stern_forces[0:2])
+            thruster_4_thrust = np.linalg.norm(stern_forces[2:4])
+
+            angle_1 = np.arctan2(bow_forces[1], bow_forces[0])
+            angle_2 = np.arctan2(bow_forces[3], bow_forces[2])
+            angle_3 = np.arctan2(stern_forces[1], stern_forces[0])
+            angle_4 = np.arctan2(stern_forces[3], stern_forces[2])
 
         thrust = [thruster_1_thrust, thruster_2_thrust, thruster_3_thrust, thruster_4_thrust]
         azi_names = ['mA1/azimuth_1_joint', 'mA1/azimuth_2_joint', 'mA1/azimuth_3_joint', 'mA1/azimuth_4_joint']
@@ -70,8 +125,6 @@ class ThrustAllocationNode(Node):
         azi_msg.position = angles
         self.azi_pub_.publish(azi_msg)
         
-
-
 def main(args=None):
     rclpy.init(args=args)
 
