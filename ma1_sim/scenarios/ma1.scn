@@ -229,6 +229,20 @@
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <ros_publisher topic="/ma1/odom"/>
         </sensor>
+
+        <sensor name="imu" type="imu" rate="100.0">
+            <link name="Base"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <ros_publisher topic="/ma1/imu"/>
+        </sensor>
+
+        <sensor name="gps" type="gps" rate="1.0">
+            <link name="Base"/>
+            <origin xyz="0.0 0.0 -3.5" rpy="0.0 0.0 0.0"/>
+            <noise ned_position="0.5"/>
+            <history samples="1"/>
+            <ros_publisher topic="/ma1/gps"/>
+        </sensor>
         
         <world_transform xyz="0.0 0.0 0.5" rpy="-1.57 0.0 0.0"/>
 
