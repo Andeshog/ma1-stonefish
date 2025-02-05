@@ -60,7 +60,6 @@ class ThrustAllocationNode(Node):
         thrust = [thruster_1_thrust, thruster_2_thrust, thruster_3_thrust, thruster_4_thrust]
         azi_names = ['mA1/azimuth_1_joint', 'mA1/azimuth_2_joint', 'mA1/azimuth_3_joint', 'mA1/azimuth_4_joint']
         angles = [angle_1, angle_2, angle_3, angle_4]
-        self.get_logger().info(f"angles: {angles}")
         
         thrust_msg = Float64MultiArray()
         thrust_msg.data = thrust
