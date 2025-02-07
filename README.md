@@ -12,6 +12,14 @@ Simulator
 ```bash
 ros2 launch ma1_sim simulation.launch.py
 ```
+Simulator with lower quality
+```bash
+ros2 launch ma1_sim simulation.launch.py rendering_quality:=low
+```
+Simulator without rendering
+```bash
+ros2 launch ma1_sim simulation_nogpu.launch.py
+```
 Thrust allocation
 ```bash
 ros2 launch ma1_thrust_allocation ma1_thrust_allocation.launch.py
