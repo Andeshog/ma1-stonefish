@@ -42,4 +42,4 @@ ros2 launch ma1_joystick_interface ma1_joystick_interface.launch.py
 | Thrusters | /ma1/thrusters | [Float64MultiArray](http://docs.ros.org/en/noetic/api/std_msgs/html/msg/Float64MultiArray.html) |
 | Servo | /ma1/servos | [JointState](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/JointState.html) |
 
-The control input $\tau$ is puiblished on topic `/ma1/tau` with type [Wrench](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Wrench.html).
+The control input $\tau$ is published on topic `/ma1/tau` with type [Wrench](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Wrench.html).
