@@ -3,8 +3,7 @@
 
 ThrustAllocatorNode::ThrustAllocatorNode()
   : Node("thrust_allocator_node"),
-    // Example vessel dimensions: length = 10.0, width = 4.0, max thrust = 100.0.
-    thrust_allocator_(10.0, 4.0, 100.0)
+    thrust_allocator_(100.0)
 {
     tau_sub_ = this->create_subscription<geometry_msgs::msg::Wrench>(
         "/ma1/tau", 10,

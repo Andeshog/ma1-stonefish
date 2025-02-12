@@ -5,14 +5,9 @@
 #include <cmath>
 #include <limits>
 
-ThrustAllocator::ThrustAllocator(double /*vesselLength*/, double /*vesselWidth*/, double maxThrust)
+ThrustAllocator::ThrustAllocator(double maxThrust)
   : maxThrust(maxThrust)
 {
-    // Hardcode thruster positions per the new specification:
-    // Thruster1: (1.8, -0.8) --> front-left or right depending on coordinate frame.
-    // Thruster2: (1.8, 0.8)
-    // Thruster3: (-1.8, 0.8)
-    // Thruster4: (-1.8, -0.8)
     thrusters.resize(4);
     thrusters[0] = { 1.8, -0.8 };
     thrusters[1] = { 1.8,  0.8 };

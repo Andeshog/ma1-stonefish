@@ -15,7 +15,7 @@ public:
     // vesselLength: overall vessel length,
     // vesselWidth: overall vessel width,
     // maxThrust: maximum thrust per component
-    ThrustAllocator(double vesselLength, double vesselWidth, double maxThrust);
+    ThrustAllocator(double maxThrust);
 
     // Allocate thrust commands given desired surge (Fx), sway (Fy) and yaw moment (Mz)
     std::vector<ThrusterCommand> allocate(double Fx, double Fy, double Mz);
