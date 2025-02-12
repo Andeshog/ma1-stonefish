@@ -17,7 +17,7 @@ class Actuators:
             ),
             extra_attributes={
                 "rate_limit": 10,
-                "saturation_limit": 100.0,
+                "saturation_limit": 300.0,
             }
         )
 
@@ -28,7 +28,7 @@ class Actuators:
             ),
             extra_attributes={
                 "rate_limit": 10.0,
-                "saturation_limit": 100.0,
+                "saturation_limit": 300.0,
             }
         )
 
@@ -39,7 +39,7 @@ class Actuators:
             ),
             extra_attributes={
                 "rate_limit": 10,
-                "saturation_limit": 100.0,
+                "saturation_limit": 300.0,
             }
         )
 
@@ -50,7 +50,7 @@ class Actuators:
             ),
             extra_attributes={
                 "rate_limit": 10,
-                "saturation_limit": 100.0,
+                "saturation_limit": 300.0,
             }
         )
 

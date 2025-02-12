@@ -66,6 +66,9 @@ class ThrustAllocationNode(Node):
         self.wrench_sub_ = self.create_subscription(
             Wrench, 'ma1/tau', self.wrench_callback, 10)
         
+        self.allocated_tau_pub_ = self.create_publisher(
+            Wrench, 'ma1/allocated_tau', 10)
+        
         self.thrust_pub_ = self.create_publisher(
             Float64MultiArray, '/ma1/thrusters', 10)
         
@@ -94,6 +97,8 @@ class ThrustAllocationNode(Node):
             angle_3 = np.arctan2(forces[5], forces[4])
             angle_4 = np.arctan2(forces[7], forces[6])
 
+            allocated_tau = self.allocator_.allocated.flatten()
+
         elif self.mode == 'hybrid':
 
             stern_tau = np.array([[msg.force.x, msg.force.y / 2, 0, 0, 0, 0]]).T
@@ -112,6 +117,8 @@ class ThrustAllocationNode(Node):
             angle_3 = np.arctan2(stern_forces[1], stern_forces[0])
             angle_4 = np.arctan2(stern_forces[3], stern_forces[2])
 
+            allocated_tau = self.allocator_bow.allocated.flatten() + self.allocator_stern.allocated.flatten()
+
         thrust = [thruster_1_thrust, thruster_2_thrust, thruster_3_thrust, thruster_4_thrust]
         azi_names = ['mA1/azimuth_1_joint', 'mA1/azimuth_2_joint', 'mA1/azimuth_3_joint', 'mA1/azimuth_4_joint']
         angles = [angle_1, angle_2, angle_3, angle_4]
@@ -124,6 +131,12 @@ class ThrustAllocationNode(Node):
         azi_msg.name = azi_names
         azi_msg.position = angles
         self.azi_pub_.publish(azi_msg)
+
+        allocated_tau_msg = Wrench()
+        allocated_tau_msg.force.x = allocated_tau[0]
+        allocated_tau_msg.force.y = allocated_tau[1]
+        allocated_tau_msg.torque.z = allocated_tau[5]
+        self.allocated_tau_pub_.publish(allocated_tau_msg)
         
 def main(args=None):
     rclpy.init(args=args)
