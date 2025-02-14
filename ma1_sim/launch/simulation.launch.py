@@ -39,6 +39,11 @@ def generate_launch_description():
         description='Window resolution height'
     )
 
+    quality_arg = DeclareLaunchArgument(
+        'rendering_quality',
+        default_value='high',
+    )
+
     # Logic to prepend the scenarios directory if only a filename is provided
     scenario_desc_resolved = PathJoinSubstitution([
         ma1_stonefish_sim_dir, 'scenarios', LaunchConfiguration('scenario_desc')
@@ -51,7 +56,8 @@ def generate_launch_description():
             'simulation_data': LaunchConfiguration('simulation_data'),
             'scenario_desc': scenario_desc_resolved,
             'window_res_x': LaunchConfiguration('window_res_x'),
-            'window_res_y': LaunchConfiguration('window_res_y')
+            'window_res_y': LaunchConfiguration('window_res_y'),
+            'rendering_quality': LaunchConfiguration('rendering_quality')
         }.items()
     )
 
@@ -60,5 +66,6 @@ def generate_launch_description():
         scenario_desc_arg,
         window_res_x_arg,
         window_res_y_arg,
+        quality_arg,
         include_stonefish_launch
     ])

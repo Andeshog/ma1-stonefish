@@ -60,7 +60,7 @@
             <child name="azimuth_3"/>
             <axis xyz="0.0 0.0 1.0"/>
             <limits min="-3.14159265359" max="3.14159265359"/>
-            <origin xyz="-1.8 0.8 0.0" rpy="0.0 0.0 1.57"/>
+            <origin xyz="-1.8 0.8 0.0" rpy="0.0 0.0 0.0"/>
         </joint>
 
         <link name="azimuth_4" type="cylinder">
@@ -75,31 +75,31 @@
             <child name="azimuth_4"/>
             <axis xyz="0.0 0.0 1.0"/>
             <limits min="-3.14159265359" max="3.14159265359"/>
-            <origin xyz="-1.8 -0.8 0.0" rpy="0.0 0.0 -1.57"/>
+            <origin xyz="-1.8 -0.8 0.0" rpy="0.0 0.0 0.0"/>
         </joint>
 
-        <actuator name="Servo1" type="servo">
+        <actuator name="bow_port" type="servo">
             <joint name="azimuth_1_joint"/>
-            <controller position_gain="1.0" velocity_gain="1.0" max_torque="10.0"/>
-            <initial position="-0.78"/>
+            <controller position_gain="1.0" velocity_gain="1.0" max_torque="1.0" max_velocity="0.5"/>
+            <!-- <initial position="-0.78"/> -->
         </actuator>
 
-        <actuator name="Servo2" type="servo">
+        <actuator name="bow_starboard" type="servo">
             <joint name="azimuth_2_joint"/>
-            <controller position_gain="1.0" velocity_gain="1.0" max_torque="10.0"/>
-            <initial position="0.78"/>
+            <controller position_gain="1.0" velocity_gain="1.0" max_torque="1.0" max_velocity="0.5"/>
+            <!-- <initial position="0.78"/> -->
         </actuator>
 
-        <actuator name="Servo3" type="servo">
+        <actuator name="stern_starboard" type="servo">
             <joint name="azimuth_3_joint"/>
-            <controller position_gain="1.0" velocity_gain="1.0" max_torque="10.0"/>
-            <initial position="0.78"/>
+            <controller position_gain="1.0" velocity_gain="1.0" max_torque="1.0" max_velocity="0.5"/>
+            <!-- <initial position="2.355"/> -->
         </actuator>
 
-        <actuator name="Servo4" type="servo">
+        <actuator name="stern_port" type="servo">
             <joint name="azimuth_4_joint"/>
-            <controller position_gain="1.0" velocity_gain="1.0" max_torque="10.0"/>
-            <initial position="-0.78"/>
+            <controller position_gain="1.0" velocity_gain="1.0" max_torque="1.0" max_velocity="0.5"/>
+            <!-- <initial position="-2.355"/> -->
         </actuator>
 
         <actuator name="Thruster1" type="thruster">
@@ -212,14 +212,14 @@
 
         <actuator name="Hatch_servo_1" type="servo">
             <joint name="Hatch1_joint"/>
-            <controller position_gain="5" velocity_gain="0.1" max_torque="500.0"/>
+            <controller position_gain="5" velocity_gain="0.1" max_torque="500.0" max_velocity="0.1"/>
             <initial position="0.0"/>
             <limits min="-1.7" max="0.0"/>
         </actuator>
 
         <actuator name="Hatch_servo_2" type="servo">
             <joint name="Hatch2_joint"/>
-            <controller position_gain="5.0" velocity_gain="0.1" max_torque="500.0"/>
+            <controller position_gain="5.0" velocity_gain="0.1" max_torque="500.0" max_velocity="0.1"/>
             <initial position="0.0"/>
             <limits min="0.0" max="1.7"/>
         </actuator>
@@ -228,6 +228,20 @@
             <link name="Base"/>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <ros_publisher topic="/ma1/odom"/>
+        </sensor>
+
+        <sensor name="imu" type="imu" rate="100.0">
+            <link name="Base"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <ros_publisher topic="/ma1/imu"/>
+        </sensor>
+
+        <sensor name="gps" type="gps" rate="1.0">
+            <link name="Base"/>
+            <origin xyz="0.0 0.0 -3.5" rpy="0.0 0.0 0.0"/>
+            <noise ned_position="0.5"/>
+            <history samples="1"/>
+            <ros_publisher topic="/ma1/gps"/>
         </sensor>
         
         <world_transform xyz="0.0 0.0 0.5" rpy="-1.57 0.0 0.0"/>
