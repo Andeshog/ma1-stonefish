@@ -113,8 +113,8 @@
             </propeller>
             <rotor_dynamics type="zero_order"/>
             <thrust_model type="linear_interpolation">
-                <input value="-330.0 -130.0 0.0 135.0 425.0"/>
-                <output value="-330.0 -130.0 0.0 135.0 425.0"/>
+                <input value="-85.0 -75.1 -62.7 -50.3 -37.8 -25.2 0.0 25.0 37.7 50.2 62.7 75.3 87.9"/>
+                <output value="-1100.0 -830.0 -599.0 -480.0 -361.0 -241.0 0.0 239.0 360.0 479.0 599.0 719.0 839.0"/>
             </thrust_model>
         </actuator> 
 
@@ -129,8 +129,8 @@
             </propeller>
             <rotor_dynamics type="zero_order"/>
             <thrust_model type="linear_interpolation">
-                <input value="-330.0 -130.0 0.0 135.0 425.0"/>
-                <output value="-330.0 -130.0 0.0 135.0 425.0"/>
+                <input value="-85.0 -75.1 -62.7 -50.3 -37.8 -25.2 0.0 25.0 37.7 50.2 62.7 75.3 87.9"/>
+                <output value="-1100.0 -830.0 -599.0 -480.0 -361.0 -241.0 0.0 239.0 360.0 479.0 599.0 719.0 839.0"/>
             </thrust_model>
         </actuator> 
 
@@ -145,8 +145,8 @@
             </propeller>
             <rotor_dynamics type="zero_order"/>
             <thrust_model type="linear_interpolation">
-                <input value="-330.0 -130.0 0.0 135.0 425.0"/>
-                <output value="-330.0 -130.0 0.0 135.0 425.0"/>
+                <input value="-85.0 -75.1 -62.7 -50.3 -37.8 -25.2 0.0 25.0 37.7 50.2 62.7 75.3 87.9"/>
+                <output value="-1100.0 -830.0 -599.0 -480.0 -361.0 -241.0 0.0 239.0 360.0 479.0 599.0 719.0 839.0"/>
             </thrust_model>
         </actuator> 
 
@@ -161,8 +161,8 @@
             </propeller>
             <rotor_dynamics type="zero_order"/>
             <thrust_model type="linear_interpolation">
-                <input value="-330.0 -130.0 0.0 135.0 425.0"/>
-                <output value="-330.0 -130.0 0.0 135.0 425.0"/>
+                <input value="-85.0 -75.1 -62.7 -50.3 -37.8 -25.2 0.0 25.0 37.7 50.2 62.7 75.3 87.9"/>
+                <output value="-1100.0 -830.0 -599.0 -480.0 -361.0 -241.0 0.0 239.0 360.0 479.0 599.0 719.0 839.0"/>
             </thrust_model>
         </actuator>
 
